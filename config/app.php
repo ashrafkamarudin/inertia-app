@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        \RunCloudIO\InternalSDK\RunCloudInternalSDKServiceProvider::class,
 
         /*
          * Application Service Providers...
