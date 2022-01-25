@@ -1,6 +1,6 @@
 <?php
 
-use App\User;
+use App\Models\User;
 use App\Workspace;
 use Carbon\Carbon;
 use App\BannedEmail;
@@ -15,14 +15,15 @@ use Symfony\Component\DomCrawler\Crawler;
 if (!function_exists('serverGoToURL')) {
     function serverGoToURL($server)
     {
+        // NEED TO FIX AGAIN
         if (!$server->connected) {
-            return route('servers:installation', $server->id);
+            return route('servers:show', $server->id);
         } elseif ($server->changeIp) {
-            return route('servers:changeip', $server->id);
+            return route('servers:show', $server->id);
         } elseif ($server->connected && !$server->online) {
-            return route('servers:offline', $server->id);
+            return route('servers:show', $server->id);
         } elseif ($server->transferStatus == 'WAITING' || $server->transferStatus == 'TRANSFERRING') {
-            return route('servers:transferring', $server->id);
+            return route('servers:show', $server->id);
         } elseif ($server->connected && $server->online) {
             return route('servers:show', $server->id);
         }

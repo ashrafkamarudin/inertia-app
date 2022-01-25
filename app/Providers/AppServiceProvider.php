@@ -14,6 +14,9 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        $this->app->bind('GeoIPService', function ($app) {
+            return new \App\Services\Internal\GeoIPService;
+        });
     }
 
     /**

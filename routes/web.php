@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ServerController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -23,6 +24,9 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::get('/servers', [ServerController::class, 'index']);
+Route::get('/servers/show', [ServerController::class, 'show'])->name('servers:show');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
