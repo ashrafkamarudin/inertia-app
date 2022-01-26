@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Arr;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
+use Laravel\Jetstream\HasProfilePhoto;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Collection;
-use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -67,7 +68,21 @@ class User extends Authenticatable
 
     public function getRolesAttribute()
     {
-        return Collection::make(['Dummy Role']);
+         // quick fix for first sdk call when no role yet from account.
+        if (!Cache::has('userrole') or config('cache.default') !== 'redis')
+            return Collection::make(['Dummy Role']);
+
+        return Cache::remember('userrole', now()->addHour(), fn() => app('RunCloud.InternalSDK')
+            ->service('account')
+            ->get('/internal/resources/find/User/first')
+            ->payload([
+                \GuzzleHttp\RequestOptions::JSON => [
+                    Arr::dot('where.id') => auth()->user()->id,
+                    'includes' => ['roles'],
+                ],
+            ])
+            ->execute()->roles
+        );
     }
 
     public function getTeamServerIDsAttribute()

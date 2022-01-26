@@ -13,6 +13,19 @@ class ServerController extends Controller
     {
         Auth::loginUsingId(111);
 
+        dd(app('RunCloud.InternalSDK')
+            ->service('account')
+            ->get('/internal/resources/find/User/first')
+            ->payload([
+                \GuzzleHttp\RequestOptions::JSON => [
+                    'where' => [
+                        'id' => 111
+                    ],
+                    'includes' => ['roles'],
+                ],
+            ])
+            ->execute()->roles);
+
         $user  = auth()->user();
         $owner = request('owner', 'all');
 
