@@ -69,20 +69,10 @@ class User extends Authenticatable
     public function getRolesAttribute()
     {
          // quick fix for first sdk call when no role yet from account.
-        if (!Cache::has('userrole') or config('cache.default') !== 'redis')
-            return Collection::make(['Dummy Role']);
+        if (!Cache::has('userrole'))
+            return Collection::make(['name' => 'Dummy Role']);
 
-        return Cache::remember('userrole', now()->addHour(), fn() => app('RunCloud.InternalSDK')
-            ->service('account')
-            ->get('/internal/resources/find/User/first')
-            ->payload([
-                \GuzzleHttp\RequestOptions::JSON => [
-                    Arr::dot('where.id') => auth()->user()->id,
-                    'includes' => ['roles'],
-                ],
-            ])
-            ->execute()->roles
-        );
+        return Collection::make(Cache::get('userrole'));
     }
 
     public function getTeamServerIDsAttribute()

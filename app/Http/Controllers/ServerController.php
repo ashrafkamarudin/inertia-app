@@ -3,33 +3,39 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Filter;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use GuzzleHttp\RequestOptions;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Inertia\Inertia;
 
 class ServerController extends Controller
 {
-    public function index()
+    public function setup()
     {
         Auth::loginUsingId(111);
 
-        dd(app('RunCloud.InternalSDK')
+        Cache::remember('userrole', now()->addHour(), fn() => app('RunCloud.InternalSDK')
             ->service('account')
             ->get('/internal/resources/find/User/first')
             ->payload([
-                \GuzzleHttp\RequestOptions::JSON => [
-                    'where' => [
-                        'id' => 111
-                    ],
+                \GuzzleHttp\RequestOptions::JSON => Arr::undot([
+                    'where.id' => auth()->user()->id,
                     'includes' => ['roles'],
-                ],
+                ])
             ])
-            ->execute()->roles);
+            ->execute()->roles
+        );
+    }
+    public function index()
+    {
+        $this->setup();
 
         $user  = auth()->user();
-        $owner = request('owner', 'all');
 
-        // dd($user);
+        $owner = request('owner', 'all');
 
         $result = app('RunCloud.InternalSDK')
             ->multiService([
@@ -132,8 +138,14 @@ class ServerController extends Controller
         };
         $tagged = array_unique($tagged);
 
+        // dd($result['servers']->data);
+
+        return Inertia::render('Servers/Index', [
+            'servers' => $result['servers']->data
+        ]);
+
         // TODO : NEED TO LIMIT SERVER DATA TO FRONT-END
-        dd($result['servers']);
+        // dd($result['servers']);
 
         // return view('servers.index', [
         //     'servers'             => Paginator::generate($result['servers'], null, ['pageName' => 'page']),

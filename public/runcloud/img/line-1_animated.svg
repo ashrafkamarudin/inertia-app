@@ -1,0 +1,14 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<svg width="100px" height="15px" viewBox="0 0 100 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>line-1</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="backup-summary" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
+        <g id="v4" transform="translate(-358.000000, -473.000000)" stroke-width="2" stroke="#4E92FF">
+            <g id="web-application" transform="translate(344.000000, 439.000000)">
+                <path id="line-1" d="M16.136419,47.5968654L25.5795813,40.2834554L36.6663271,47.5968654L52.240416,35.5968654L68.2594788,44.4428424L78.4327745,40.2834554L93.6715661,44.4428424L106.884473,40.2834554L112.136419,44.4428424" class="RNPCuhyL_0"></path>
+            </g>
+        </g>
+    </g>
+<style>.RNPCuhyL_0{stroke-dasharray:111 113;stroke-dashoffset:112;animation:RNPCuhyL_draw 666ms linear 0ms forwards;}@keyframes RNPCuhyL_draw{100%{stroke-dashoffset:0;}}@keyframes RNPCuhyL_fade{0%{stroke-opacity:1;}88.88888888888889%{stroke-opacity:1;}100%{stroke-opacity:0;}}</style></svg>

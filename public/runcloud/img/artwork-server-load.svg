@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="315px" height="70px" viewBox="0 0 315 70" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>graph-dummy</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="zdd" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="graph-dummy" transform="translate(0.000000, 2.000000)" fill-rule="nonzero">
+            <g id="Stacked-Group" transform="translate(0.000000, 28.000000)" fill="#CDDBE7">
+                <circle id="Oval-3" cx="1.5" cy="1.5" r="1.5"></circle>
+                <circle id="Oval-3" cx="14.5" cy="1.5" r="1.5"></circle>
+                <circle id="Oval-3" cx="27.5" cy="1.5" r="1.5"></circle>
+                <circle id="Oval-3" cx="40.5" cy="1.5" r="1.5"></circle>
+                <circle id="Oval-3" cx="53.5" cy="1.5" r="1.5"></circle>
+                <circle id="Oval-3" cx="66.5" cy="1.5" r="1.5"></circle>
+                <circle id="Oval-3" cx="79.5" cy="1.5" r="1.5"></circle>
+                <circle id="Oval-3" cx="92.5" cy="1.5" r="1.5"></circle>
+                <circle id="Oval-3" cx="105.5" cy="1.5" r="1.5"></circle>
+                <circle id="Oval-3" cx="118.5" cy="1.5" r="1.5"></circle>
+                <circle id="Oval-3" cx="131.5" cy="1.5" r="1.5"></circle>
+                <circle id="Oval-3" cx="144.5" cy="1.5" r="1.5"></circle>
+                <circle id="Oval-3" cx="157.5" cy="1.5" r="1.5"></circle>
+                <circle id="Oval-3" cx="170.5" cy="1.5" r="1.5"></circle>
+                <circle id="Oval-3" cx="183.5" cy="1.5" r="1.5"></circle>
+                <circle id="Oval-3" cx="196.5" cy="1.5" r="1.5"></circle>
+                <circle id="Oval-3" cx="209.5" cy="1.5" r="1.5"></circle>
+                <circle id="Oval-3" cx="222.5" cy="1.5" r="1.5"></circle>
+                <circle id="Oval-3" cx="235.5" cy="1.5" r="1.5"></circle>
+                <circle id="Oval-3" cx="248.5" cy="1.5" r="1.5"></circle>
+                <circle id="Oval-3" cx="261.5" cy="1.5" r="1.5"></circle>
+                <circle id="Oval-3" cx="274.5" cy="1.5" r="1.5"></circle>
+                <circle id="Oval-3" cx="287.5" cy="1.5" r="1.5"></circle>
+                <circle id="Oval-3" cx="300.5" cy="1.5" r="1.5"></circle>
+                <circle id="Oval-3" cx="313.5" cy="1.5" r="1.5"></circle>
+            </g>
+            <g id="line" transform="translate(12.000000, 0.000000)">
+                <path d="M4.94644676,13.7686475 C13.9077464,16.4161049 19.9118131,19.4147472 22.9586468,22.7645744 C30.5442543,31.1045355 39.5030138,39.1897708 46.20418,39.1897708 C65.6929328,39.1897708 79.4027275,19.4557009 99.9254139,22.7645744 C117.033661,25.5229377 126.071734,67.2130983 144.713213,65.1508656 C168.744776,62.4923494 174.90265,3.82407596 190.90331,0.486351548 C207.533237,-3.65347461 213.829088,37.660642 233.381952,39.1897708 C252.934815,40.7188996 264.386422,13.7686475 284.479979,13.7686475" id="Path-2" stroke="#E8F0F7" stroke-width="4"></path>
+                <circle id="Oval-4" fill="#E5EEF6" cx="286" cy="13" r="5"></circle>
+                <circle id="Oval-4" fill="#E5EEF6" cx="5" cy="13" r="5"></circle>
+            </g>
+        </g>
+    </g>
+</svg>
