@@ -34,8 +34,9 @@ class ServerController extends Controller
         $this->setup();
 
         $user  = auth()->user();
-
         $owner = request('owner', 'all');
+
+        info(request());
 
         $result = app('RunCloud.InternalSDK')
             ->multiService([
@@ -138,13 +139,11 @@ class ServerController extends Controller
         };
         $tagged = array_unique($tagged);
 
-        // dd($result['servers']->data);
-
+        // TODO : NEED TO LIMIT SERVER DATA TO FRONT-END
         return Inertia::render('Servers/Index', [
             'servers' => $result['servers']->data
         ]);
 
-        // TODO : NEED TO LIMIT SERVER DATA TO FRONT-END
         // dd($result['servers']);
 
         // return view('servers.index', [

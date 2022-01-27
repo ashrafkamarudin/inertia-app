@@ -15,7 +15,8 @@
                             <div class="flex-grow w-full filter-group filter md:w-auto md:flex-grow-0 filter-slot" data-v-ba069038="">
                                 <div class="flex-grow flex-col md:flex-row md:flex-grow-0 text-center hidden md:flex pb-4 xl:pb-0" data-v-ba069038="">
                                     <div class="md:flex md:items-center md:content-between form-group form-search" data-v-41c6da32="" data-v-ba069038="">
-                                        <i class="pl-3 left-0 opacity-75 rc rc-ln-search rc-icon absolute left-icon transform top-1/2 -translate-y-1/2" data-v-41c6da32=""></i> <!----> <input class="form-control pl-8 border-gray-500" data-v-41c6da32="" placeholder="Search..." type="text"> <!----> <!---->
+                                        <i class="pl-3 left-0 opacity-75 rc rc-ln-search rc-icon absolute left-icon transform top-1/2 -translate-y-1/2" data-v-41c6da32=""></i> <!----> 
+                                        <input class="form-control pl-8 border-gray-500" data-v-41c6da32="" placeholder="Search..." type="text" v-model.lazy="searchValue" @change="search"> <!----> <!---->
                                     </div>
                                     <div class="form-group w-auto" data-v-ba069038="">
                                         <!----><!----><!---->
@@ -202,6 +203,13 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="panel-footer flex justify-between">
+                    <div>
+                        <a @click="previousPage()" class="mr-2">Previous</a>
+                        <a @click="nextPage()" class="mr-4">Next</a>
+                    </div>
+                    <a @click="reloadPage(true)" class="right-0">Reset</a>
+                </div>
             </div>
         </div>
     </app-layout>
@@ -217,5 +225,63 @@
             AppLayout,
             Link
         },
+
+        data() {
+            return {
+                url: new URL(window.location.href),
+                urlParams: new URLSearchParams(window.location.search),
+                searchKey: 'search',
+                searchValue: null,
+            }
+        },
+
+        created () {
+            let search = this.urlParams.get(this.searchKey)
+
+            // append existing filter params
+            for (let params of this.urlParams.entries()) {
+                this.url.searchParams.set(params[0], params[1])
+            }
+        },
+
+        methods: {
+            search () {
+                // set the new query params
+                this.url.searchParams.set('scroll', window.scrollY)
+                this.url.searchParams.set(this.searchKey, this.searchValue)
+
+                this.reloadPage()
+            },
+
+            reloadPage(reset = false) {
+                let url = this.url
+
+                if (reset) {
+                    return window.location.href = url.origin + url.pathname
+                }
+
+                return window.location.href = url.toString();
+            },
+
+            getCurrentPage() {
+                let page = this.url.searchParams.get('page')
+
+                if (page == null) {
+                    page = 1
+                }
+
+                return page
+            },
+
+            nextPage() {
+                this.url.searchParams.set('page', this.getCurrentPage()+1)
+                this.reloadPage()
+            },
+
+            previousPage() {
+                this.url.searchParams.set('page', this.getCurrentPage()-1)
+                this.reloadPage()
+            }
+        }
     })
 </script>
