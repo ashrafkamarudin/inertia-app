@@ -2,10 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use App\Http\Resources\UserResource;
-use Illuminate\Http\Request;
-use Inertia\Inertia;
 use Inertia\Middleware;
+use Illuminate\Support\Arr;
+use Illuminate\Http\Request;
+use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Cache;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -39,7 +40,32 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         return array_merge(parent::share($request), [
-            'user' => UserResource::make(auth()->user())
+            'user' =>  function () use ($request) {
+                if (! $request->user()) {
+                    return;
+                }
+
+                return UserResource::make(auth()->user());
+            },
+            'user-permission' => $this->getAbilities()
         ]);
+    }
+
+    private function getAbilities()
+    {
+        return [];
+        // return Cache::remember('user-permission', now()->addHour(), fn () => collect(
+        //     app('RunCloud.InternalSDK')
+        //         ->service('account')
+        //         ->get('/internal/resources/find/User/first')
+        //         ->payload([
+        //             \GuzzleHttp\RequestOptions::JSON => Arr::undot([
+        //                 'where.id' => 111,
+        //                 'includes' => ['roles.abilities'],
+        //             ])
+        //         ])
+        //         ->execute()->roles[0]->abilities
+        //     )->pluck('name')
+        // );
     }
 }
