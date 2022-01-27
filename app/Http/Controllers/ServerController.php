@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Filter;
+use App\Http\Resources\BasicModel;
+use App\Http\Resources\ServerResource;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use GuzzleHttp\RequestOptions;
@@ -139,12 +142,12 @@ class ServerController extends Controller
         };
         $tagged = array_unique($tagged);
 
+
         // TODO : NEED TO LIMIT SERVER DATA TO FRONT-END
         return Inertia::render('Servers/Index', [
-            'servers' => $result['servers']->data
+            'servers' => ServerResource::collection($result['servers']->data)
         ]);
 
-        // dd($result['servers']);
 
         // return view('servers.index', [
         //     'servers'             => Paginator::generate($result['servers'], null, ['pageName' => 'page']),
@@ -160,4 +163,17 @@ class ServerController extends Controller
     {
         # code...
     }
+}
+
+class BaseModel extends \Illuminate\Database\Eloquent\Model {
+    /**
+     * The attributes that are not mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
+    ];
 }

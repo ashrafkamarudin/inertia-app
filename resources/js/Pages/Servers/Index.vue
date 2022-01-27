@@ -137,7 +137,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="server in $page.props.servers" :key="server.id" class="group cursor-pointer">
+                        <tr v-for="server in $page.props.servers.data" :key="server.id" class="group cursor-pointer">
                             <td class="w-3/12">
                                 <div class="items-center no-scrollbar">
                                     <div class="flex items-center">
