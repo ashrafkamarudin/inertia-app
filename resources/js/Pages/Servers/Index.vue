@@ -264,13 +264,9 @@
             },
 
             getCurrentPage() {
-                let page = this.url.searchParams.get('page')
+                let page = this.url.searchParams.get('page') ?? 1
 
-                if (page == null) {
-                    page = 1
-                }
-
-                return page
+                return parseInt(page)
             },
 
             nextPage() {
